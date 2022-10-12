@@ -9,7 +9,7 @@ function WorkoutForm() {
 
     const [sport, setSport] = useState('');
     const [days, setDays] = useState(0);
-    const [sportInfo, setSportInfo] = ([]);
+    const [sportInfo, setSportInfo] = useState([]);
     const [upper, setUpper] = useState([]);
     const [lower, setLower] = useState([]);
 
@@ -27,23 +27,20 @@ function WorkoutForm() {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        
-        const exercise = {
-            sport: sport,
-            days: days
-        }
+
 
         // sportinfo
         axios.get('http://localhost:4200/sportInfo')
             .then(response => {
                 if (response.data.length > 0) {
-                    response.data.map((item) => {
-                        if (item.name === sport) {
-                            setSportInfo(item.muscleFocus);
+                    for (let i = 0; i < response.data.length; i++) {
+                        if (response.data[i].name === sport) {
+                            setSportInfo(response.data[i].muscleFocus);
+                            break;
                         } else{
                             setSportInfo(['Sport/Goal selection not found.']);
                         }
-                    });
+                    }
                 }
             });
 
@@ -52,22 +49,19 @@ function WorkoutForm() {
         axios.get('http://localhost:4200/group')
             .then(response => {
                 if (response.data.length > 0) {
-                    response.data.map((item) => {
-                        if (item.name === 'lower') {
-                            setLower(item.group);
-                        } else if (item.name = 'upper'){
-                            setUpper(item.group)
-                        } else {
-                            setSportInfo(['Sport/Goal selection not found.']);
+                    for (let i = 0; i < response.data.length; i++) {
+                        if (response.data[i].name === 'upper') {
+                            setUpper(response.data[i].exercises);
+                        } else if ((response.data[i].name === 'lower')){
+                            setLower(response.data[i].exercises);
                         }
-                    });
+                    }
                 }
             });
 
-        console.log(exercise);
-        console.log(sportInfo);
-        console.log(upper);
-        console.log(lower);
+        console.log("upper: " + upper[0]);
+        console.log("lower: " + lower[0]);
+        console.log("info: " + sportInfo[0]);
         //window.location = '/';
     }
     
