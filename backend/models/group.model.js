@@ -2,19 +2,21 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const exerciseSchema = new Schema({
+const groupSchema = new Schema({
+    //body part
     name: {
         type: String,
         required: true,
         unique: true
     }
 }, {
-    muscleFocus: {
-        type: String,
+    //array of exercisesg
+    group: {
+        type: Array,
         required: true
     }
 });
 
-const Exercise = mongoose.model('Exercise', exerciseSchema);
+const Group = mongoose.model('Group', groupSchema);
 
-module.exports = Exercise;
+module.exports = Group;

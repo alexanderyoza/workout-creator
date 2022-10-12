@@ -9,8 +9,9 @@ function WorkoutForm() {
 
     const [sport, setSport] = useState('');
     const [days, setDays] = useState(0);
-    const [sportInfo, setSortInfo] = ({});
-    const [exercises, setExercises] = useState(0);
+    const [sportInfo, setSportInfo] = ([]);
+    const [upper, setUpper] = useState([]);
+    const [lower, setLower] = useState([]);
 
     useEffect(() => {
         setSport('soccer');
@@ -26,19 +27,47 @@ function WorkoutForm() {
 
     const onSubmit = (e) => {
         e.preventDefault();
+        
         const exercise = {
             sport: sport,
             days: days
         }
 
-        axios.get('http://localhost:4200/')
+        // sportinfo
+        axios.get('http://localhost:4200/sportInfo')
             .then(response => {
                 if (response.data.length > 0) {
-
+                    response.data.map((item) => {
+                        if (item.name === sport) {
+                            setSportInfo(item.muscleFocus);
+                        } else{
+                            setSportInfo(['Sport/Goal selection not found.']);
+                        }
+                    });
                 }
-            })
+            });
+
+
+        // group
+        axios.get('http://localhost:4200/group')
+            .then(response => {
+                if (response.data.length > 0) {
+                    response.data.map((item) => {
+                        if (item.name === 'lower') {
+                            setLower(item.group);
+                        } else if (item.name = 'upper'){
+                            setUpper(item.group)
+                        } else {
+                            setSportInfo(['Sport/Goal selection not found.']);
+                        }
+                    });
+                }
+            });
 
         console.log(exercise);
+        console.log(sportInfo);
+        console.log(upper);
+        console.log(lower);
         //window.location = '/';
     }
     
