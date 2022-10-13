@@ -78,6 +78,7 @@ function WorkoutForm() {
                         <option value='volleyball'>Volleyball</option>
                         <option value='football'>Football</option>
                         <option value='basketball'>Basketball</option>
+                        <option value='strength'>Strength</option>
                     </select>
                     <br />
                     <label htmlFor='days'>{promptDays}</label>
