@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import WorkoutPlan from './WorkoutPlan';
 
 function WorkoutForm() {
 
@@ -7,20 +8,21 @@ function WorkoutForm() {
     const promptSport = 'Select your sport/goal: ';
     const promptDays = 'Select the number of weekly workouts: '; 
 
-    const [sport, setSport] = useState('');
-    const [days, setDays] = useState(0);
+    const [sport, setSport] = useState("soccer");
+    const [days, setDays] = useState(1);
     const [sportInfo, setSportInfo] = useState([]);
     const [upper, setUpper] = useState([]);
     const [lower, setLower] = useState([]);
+    const [workSect, setWorkSect] = useState(<div></div>);
 
-    useEffect(() => {
-        setSport('soccer');
-        setDays(1);
-    })
+    const workout = () => {
+        setWorkSect(<WorkoutPlan sport={sport} sportInfo={sportInfo} upper={upper} lower={lower} days={days}/>);
+    }
 
     const onChangeSport = (e) => {
         setSport(e.target.value);
     }
+
     const onChangeDays = (e) => {
         setDays(e.target.value);
     }
@@ -30,7 +32,7 @@ function WorkoutForm() {
 
 
         // sportinfo
-        axios.get('http://localhost:4200/sportInfo')
+        axios.get('http://localhost:4200/sportinfo')
             .then(response => {
                 if (response.data.length > 0) {
                     for (let i = 0; i < response.data.length; i++) {
@@ -50,18 +52,18 @@ function WorkoutForm() {
             .then(response => {
                 if (response.data.length > 0) {
                     for (let i = 0; i < response.data.length; i++) {
-                        if (response.data[i].name === 'upper') {
+                        if (response.data[i].name === "upper") {
                             setUpper(response.data[i].exercises);
-                        } else if ((response.data[i].name === 'lower')){
+                        } else if ((response.data[i].name === "lower")){
                             setLower(response.data[i].exercises);
                         }
                     }
                 }
             });
 
-        console.log("upper: " + upper[0]);
-        console.log("lower: " + lower[0]);
-        console.log("info: " + sportInfo[0]);
+        console.log("sport: " + sport);
+        console.log("days: " + days);
+        workout();
         //window.location = '/';
     }
     
@@ -95,6 +97,8 @@ function WorkoutForm() {
                     <input type='submit' value='Submit'/>
                 </form>
             </div>
+            {workSect}
+            
         </div>
     );
 }
