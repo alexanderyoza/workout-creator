@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import WorkoutPlan from './WorkoutPlan';
 
@@ -13,11 +13,8 @@ function WorkoutForm() {
     const [sportInfo, setSportInfo] = useState([]);
     const [upper, setUpper] = useState([]);
     const [lower, setLower] = useState([]);
-    const [workSect, setWorkSect] = useState(<div></div>);
+    const [show, setShow] = useState(false);
 
-    const workout = () => {
-        setWorkSect(<WorkoutPlan sport={sport} sportInfo={sportInfo} upper={upper} lower={lower} days={days}/>);
-    }
 
     const onChangeSport = (e) => {
         setSport(e.target.value);
@@ -61,9 +58,7 @@ function WorkoutForm() {
                 }
             });
 
-        console.log("sport: " + sport);
-        console.log("days: " + days);
-        workout();
+        setShow(true);
         //window.location = '/';
     }
     
@@ -97,7 +92,7 @@ function WorkoutForm() {
                     <input type='submit' value='Submit'/>
                 </form>
             </div>
-            {workSect}
+            <WorkoutPlan show={show} sport={sport} sportInfo={sportInfo} upper={upper} lower={lower} days={days}/>
             
         </div>
     );
