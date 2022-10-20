@@ -1,7 +1,13 @@
-//import React, { useEffect, useState } from 'react';
+import './Workout.css';
 
 function WorkoutPlan(props) {
 
+    const showSport = () => {
+        if (props.show === true){
+            return (<div className='show-sport'>Sport: {props.sport.charAt(0).toUpperCase() + props.sport.slice(1)}</div>);
+        }
+        return (<div></div>);
+    }
     
 
     //create the workout
@@ -12,21 +18,21 @@ function WorkoutPlan(props) {
                 let workDay;
                 let repRng = props.sportInfo[2];
                 workDay = (
-                    <div>
-                        <div>
-                            Day 1
+                    <div className='day-plan'>
+                        <div className='day-muscle'>
+                            Day 1: Full Body
                         </div>
-                        <div>
+                        <div className='exercises'>
                             {props.upper.map(element => {
                                 return(
-                                    <div>
-                                        <div>
+                                    <div className='exercise'>
+                                        <div className='ex-name'>
                                             {element[0]}
                                         </div>
-                                        <div>
-                                            Sets: 3
+                                        <div className='sets'>
+                                            Sets: 2
                                         </div>
-                                        <div>
+                                        <div className='reps'>
                                             Reps: {repRng-2}-{repRng}
                                         </div>
                                     </div>
@@ -35,14 +41,14 @@ function WorkoutPlan(props) {
                             })}
                             {props.lower.map(element => {
                                 return(
-                                    <div>
-                                        <div>
+                                    <div className='exercise'>
+                                        <div className='ex-name'>
                                             {element[0]}
                                         </div>
-                                        <div>
-                                            Sets: 3
+                                        <div className='sets'>
+                                            Sets: 2
                                         </div>
-                                        <div>
+                                        <div className='reps'>
                                             Reps: {repRng-2}-{repRng}
                                         </div>
                                     </div>
@@ -54,37 +60,96 @@ function WorkoutPlan(props) {
                 );
                 workArr.push(workDay);
             } else {
-                let upperDays = Math.floor(props.days*props.sportInfo[0]/100);
-                let lowerDays = Math.ceil(props.days*props.sportInfo[1]/100);
-
+                let upperDays = Math.ceil(props.days*props.sportInfo[0]/100);
+                let lowerDays = Math.floor(props.days*props.sportInfo[1]/100);
+                console.log(upperDays);
+                console.log(lowerDays);
+                let upperCnt = 0;
+                let lowerCnt = 0;
+                let repRng = props.sportInfo[2];
                 for (let i = 1; i <= props.days; i++){
                     let workDay;
-                    let repRng = props.sportInfo[2];
                     if (upperDays >= lowerDays){
-                        
+                        //create upper workout
+                        workDay = (
+                            <div className='day-plan'>
+                                <div className='day-muscle'>
+                                    Day {i}: Upper Body
+                                </div>
+                                <div className='exercises'>
+                                    {// eslint-disable-next-line
+                                    props.upper.map(element => {
+                                        return(
+                                            <div className='exercise'>
+                                                <div className='ex-name'>
+                                                    {element[upperCnt % element.length]}
+                                                </div>
+                                                <div className='sets'>
+                                                    Sets: 3
+                                                </div>
+                                                <div className='reps'>
+                                                    Reps: {repRng-2}-{repRng}
+                                                </div>
+                                            </div>
+                                        );
+                                        
+                                    })}
+                                </div>
+                            </div>
+                        );
+                        upperCnt++;
                         upperDays--;
                     } else {
-
+                        //create lower workout
+                        workDay = (
+                            <div className='day-plan'>
+                                <div className='day-muscle'>
+                                    Day {i}: Lower Body
+                                </div>
+                                <div className='exercises'>
+                                    {// eslint-disable-next-line
+                                    props.lower.map(element => {
+                                        return(
+                                            <div className='exercise'>
+                                                <div className='ex-name'>
+                                                    {element[lowerCnt % element.length]}
+                                                </div>
+                                                <div className='sets'>
+                                                    Sets: 3
+                                                </div>
+                                                <div className='reps'>
+                                                    Reps: {repRng-2}-{repRng}
+                                                </div>
+                                            </div>
+                                        );
+                                        
+                                    })}
+                                </div>
+                            </div>
+                        );
+                        lowerCnt++;
                         lowerDays--;
                     }
 
                     workArr.push(workDay);
                 }
             }
+        } else {
+            workArr = [];
         }
         return workArr;
     }
 
   return (
-    <div>
-        <div>
-            Sport: {props.sport.charAt(0).toUpperCase() + props.sport.slice(1)}
+    <div className='plan-cont'>
+        <div className='show-sport-cont'>
+            {showSport()}
         </div>
-        <div>
+        <div className='days'>
             {workouts().map(element => <div>{element}</div>)}
         </div>
     </div>
-  )
+  );
 }
 
 export default WorkoutPlan;

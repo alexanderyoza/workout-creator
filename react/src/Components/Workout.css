@@ -1,0 +1,215 @@
+.cont{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: fit-content;
+    min-height: 100vh;
+    background-color: #040334;
+    font-size: 0;
+}
+
+.header{
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFF00;
+    padding: 10px 0;
+    margin: 0;
+}
+
+.title-text{
+    font-size: calc(25px + 1vw);
+    color: #040334;
+}
+
+.form-cont{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5vh;
+    width: 80vw;
+    max-width: 800px;
+    background-color: #FFFF00;
+    height: fit-content;
+    border-radius: 15px;
+}
+
+.form{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.drop-cont{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.top-dropdown{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-direction: row;
+    position: relative;
+    font-size: calc(15px + 1vw);
+    border-bottom: 1px solid #040334;
+    box-shadow: 0 2px 2px -1px #FFFF00;;
+}
+
+
+.top-dropdown-label{
+    display: inline-flex;
+    height: 100%;
+    align-items: center;
+    margin: 0;
+}
+
+.top-links{
+    display: none;
+
+}
+
+.top-links2{
+    display: block;
+    padding-top: 14px;
+    position: relative;
+    background-color: #FFFF00;
+    font-size: 20px;
+    height: fit-content;
+    flex-direction: column;
+    width: 200px;
+    z-index: 2;
+}
+
+.top-link-container{
+    display: flex;
+    width: 100%;
+    height: 40px;
+}
+
+.top-link{
+    display: flex;
+    justify-content: right;
+    padding-right: 10px;
+    width: 100%;
+    color: #040334;
+    align-items: center;
+}
+
+
+.top-link:hover{
+    color: #0a07a6;
+}
+
+.current-info{
+    font-size: calc(15px + 1vw);
+}
+
+.submit-cont{
+    width: calc(75vw - 40px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.submit{
+    font-size: calc(15px + 1vw);
+    padding: 10px;
+    color: #FFFF00;
+    background-color: #040334;
+    border-radius: 15px;
+    margin-bottom: 40px;
+    cursor: pointer;
+}
+
+.submit:hover{
+    cursor: pointer;
+
+}
+
+.plan-cont{
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    width: 80vw;
+    max-width: 800px;
+    background-color: #FFFF00;
+    height: fit-content;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.show-sport-cont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.show-sport{
+    margin-top: 20px;
+    font-size: calc(20px + 1vw);
+    color: #040334;
+}
+
+.days{
+    width: 75vw;
+    max-width: 760px;
+}
+
+.day-plan{
+    padding-left: 40px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+}
+
+.day-muscle{
+    display: flex;
+    justify-content: left;
+    font-size: calc(18px + 1vw);
+    color: #040334;
+}
+
+.exercises{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-bottom: 20px;
+}
+
+.exercise{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.ex-name{
+    display: flex;
+    justify-content: left;
+    font-size: calc(15px + 1vw);
+    color: #040334;
+}
+
+.sets{
+    font-size: calc(15px + 1vw);
+    padding-left: 10px;
+    color: #040334;
+}
+
+.reps{
+    font-size: calc(15px + 1vw);
+    padding-left: 10px;
+    color: #040334;
+}
